@@ -1,10 +1,10 @@
-# Metro - מערכת ניהול עסקית
+# Metro - Business Management System
 
-אפליקציית ניהול עסקית מבוססת WPF עם עיצוב Dark Mode מלא.
+A WPF business management application with full Dark Mode design.
 
-## טכנולוגיות
+## Tech Stack
 
-| טכנולוגיה | גרסה |
+| Technology | Version |
 |---|---|
 | .NET | 10.0 |
 | WPF | Windows Presentation Foundation |
@@ -12,7 +12,7 @@
 | MahApps.Metro | 2.4.10 |
 | C# | 13 |
 
-## מבנה הפרויקט
+## Project Structure
 
 ```
 Metro/
@@ -34,26 +34,26 @@ Metro/
 │   ├── OrdersViewModel.cs
 │   └── SettingsViewModel.cs
 └── Views/
-    ├── LoginView.xaml          # חלון התחברות
-    ├── ShellView.xaml          # חלון ראשי עם Tabs
-    ├── DashboardView.xaml      # לוח בקרה
-    ├── UsersView.xaml          # ניהול משתמשים
-    ├── ProductsView.xaml       # ניהול מוצרים
-    ├── OrdersView.xaml         # הזמנות
-    └── SettingsView.xaml       # הגדרות
+    ├── LoginView.xaml          # Login window
+    ├── ShellView.xaml          # Main window with tabs
+    ├── DashboardView.xaml      # Dashboard
+    ├── UsersView.xaml          # User management
+    ├── ProductsView.xaml       # Product management
+    ├── OrdersView.xaml         # Orders
+    └── SettingsView.xaml       # Settings
 ```
 
-## פיצ'רים
+## Features
 
-- **חלון התחברות** — אימות שם משתמש וסיסמא עם הודעות שגיאה ו-loading indicator
-- **לוח בקרה** — כרטיסי סטטיסטיקה (משתמשים, מוצרים, הזמנות, הכנסות) וסטטוס מערכת
-- **ניהול משתמשים** — DataGrid עם חיפוש, הוספה ומחיקה
-- **ניהול מוצרים** — DataGrid עם חיפוש, הוספה ומחיקה
-- **הזמנות** — טבלת הזמנות עם סטטוסים צבעוניים
-- **הגדרות** — בחירת ערכת צבעים, מצב כהה ושפה
-- **Dark Mode** — עיצוב כהה מלא על בסיס MahApps.Metro
+- **Login Window** — Username & password authentication with validation, error messages and loading indicator
+- **Dashboard** — Statistics cards (users, products, orders, revenue) and system status panel
+- **User Management** — DataGrid with search, add and delete
+- **Product Management** — DataGrid with search, add and delete
+- **Orders** — Orders table with color-coded status badges
+- **Settings** — Theme selector, dark mode toggle and language picker
+- **Dark Mode** — Full dark UI built on MahApps.Metro theming
 
-## הרצה
+## Getting Started
 
 ```bash
 git clone https://github.com/danelimelech1/Metro.git
@@ -61,23 +61,23 @@ cd Metro
 dotnet run
 ```
 
-### דרישות מקדימות
+### Prerequisites
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
-- Windows OS (נדרש ל-WPF)
+- Windows OS (required for WPF)
 
-## כניסה למערכת
+## Default Credentials
 
-| משתמש | סיסמא | תפקיד |
+| Username | Password | Role |
 |---|---|---|
-| `admin` | `admin123` | מנהל |
-| `manager` | `manager123` | מנהל מחלקה |
-| `user` | `user123` | משתמש |
+| `admin` | `admin123` | Administrator |
+| `manager` | `manager123` | Department Manager |
+| `user` | `user123` | User |
 
-## ארכיטקטורה
+## Architecture
 
-האפליקציה ממשת את דפוס **MVVM** (Model-View-ViewModel):
+The application follows the **MVVM** pattern:
 
-- **Model** — מחלקות נתונים (`User`, `Product`, `Order`)
-- **View** — קבצי XAML עם MahApps.Metro styling
-- **ViewModel** — לוגיקת UI עם `MvxViewModel`, commands ו-data binding
-- **Services** — שכבת שירותים (`AuthService`, `DataService`) מוזרקת דרך constructor injection
+- **Model** — Data classes (`User`, `Product`, `Order`)
+- **View** — XAML files styled with MahApps.Metro
+- **ViewModel** — UI logic using `MvxViewModel`, commands and data binding
+- **Services** — Service layer (`AuthService`, `DataService`) injected via constructor injection
