@@ -1,0 +1,105 @@
+<UserControl x:Class="Metro.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             FlowDirection="RightToLeft">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24" MaxWidth="600" HorizontalAlignment="Right">
+
+            <TextBlock Text="&#x2699; הגדרות מערכת" FontSize="20" FontWeight="Bold"
+                       Foreground="{DynamicResource MahApps.Brushes.Accent}"
+                       Margin="0,0,0,24"/>
+
+            <!-- Account Section -->
+            <Border Background="{DynamicResource MahApps.Brushes.Control.Background}"
+                    CornerRadius="10" Padding="20" Margin="0,0,0,16"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource MahApps.Brushes.Border.NonActive}">
+                <StackPanel>
+                    <TextBlock Text="פרטי חשבון" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,14"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="משתמש מחובר:" VerticalAlignment="Center"
+                                   Margin="0,0,12,0" Foreground="#666"/>
+                        <TextBlock Grid.Column="1" Text="{Binding CurrentUser}"
+                                   FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Appearance Section -->
+            <Border Background="{DynamicResource MahApps.Brushes.Control.Background}"
+                    CornerRadius="10" Padding="20" Margin="0,0,0,16"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource MahApps.Brushes.Border.NonActive}">
+                <StackPanel>
+                    <TextBlock Text="מראה" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,14"/>
+
+                    <!-- Theme -->
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="ערכת צבעים:" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="1"
+                                  ItemsSource="{Binding AvailableThemes}"
+                                  SelectedItem="{Binding SelectedTheme}"
+                                  Height="34"/>
+                    </Grid>
+
+                    <!-- Dark Mode -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="מצב כהה:" VerticalAlignment="Center"/>
+                        <mah:ToggleSwitch Grid.Column="1"
+                                          IsOn="{Binding IsDarkMode}"
+                                          OnContent="פעיל" OffContent="כבוי"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Language Section -->
+            <Border Background="{DynamicResource MahApps.Brushes.Control.Background}"
+                    CornerRadius="10" Padding="20" Margin="0,0,0,16"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource MahApps.Brushes.Border.NonActive}">
+                <StackPanel>
+                    <TextBlock Text="שפה ואזור" FontSize="15" FontWeight="SemiBold" Margin="0,0,0,14"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="שפת ממשק:" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="1" Height="34"
+                                  SelectedValue="{Binding Language}">
+                            <ComboBoxItem Content="עברית" IsSelected="True"/>
+                            <ComboBoxItem Content="English"/>
+                            <ComboBoxItem Content="العربية"/>
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Save Button -->
+            <Button Content="שמור הגדרות"
+                    Command="{Binding SaveCommand}"
+                    Style="{StaticResource MahApps.Styles.Button.Flat}"
+                    Background="{DynamicResource MahApps.Brushes.Accent}"
+                    Foreground="White"
+                    Width="180" Height="42" HorizontalAlignment="Right"
+                    FontSize="14" BorderThickness="0"/>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,83 @@
+<UserControl x:Class="Metro.Views.ProductsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             FlowDirection="RightToLeft">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="&#x1F4E6; ניהול מוצרים" FontSize="20" FontWeight="Bold"
+                       Foreground="{DynamicResource MahApps.Brushes.Accent}"
+                       VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Content="+ הוסף מוצר" Command="{Binding AddProductCommand}"
+                        Style="{StaticResource MahApps.Styles.Button.Square.Highlight}"
+                        Margin="0,0,8,0" Padding="12,6"/>
+                <Button Content="&#x21BB; רענן" Command="{Binding RefreshCommand}"
+                        Style="{StaticResource MahApps.Styles.Button.Square}"
+                        Padding="12,6"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Search -->
+        <TextBox Grid.Row="1"
+            mah:TextBoxHelper.Watermark="&#x1F50D; חיפוש לפי שם או קטגוריה..."
+            Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            FontSize="13" Height="36" Margin="0,0,0,12"/>
+
+        <!-- Products Table -->
+        <DataGrid Grid.Row="2"
+                  ItemsSource="{Binding Products}"
+                  SelectedItem="{Binding SelectedProduct}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="Horizontal"
+                  HeadersVisibility="Column"
+                  SelectionMode="Single"
+                  FontSize="13"
+                  RowHeight="40">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="#" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="שם מוצר" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="קטגוריה" Binding="{Binding Category}" Width="120"/>
+                <DataGridTextColumn Header="מחיר"
+                    Binding="{Binding Price, StringFormat='₪{0:N2}'}" Width="100"/>
+                <DataGridTextColumn Header="מלאי" Binding="{Binding Stock}" Width="80"/>
+                <DataGridTextColumn Header="תיאור" Binding="{Binding Description}" Width="180"/>
+                <DataGridTemplateColumn Header="סטטוס" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="10" Padding="8,3" HorizontalAlignment="Center"
+                                    Background="{Binding IsActive, Converter={StaticResource BoolToColorConverter}}">
+                                <TextBlock Text="{Binding IsActive, Converter={StaticResource BoolToStatusConverter}}"
+                                           Foreground="White" FontSize="11"/>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="פעולות" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="&#x1F5D1;" ToolTip="מחק"
+                                    Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    Background="Transparent" BorderThickness="0"
+                                    FontSize="16" Cursor="Hand"
+                                    HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

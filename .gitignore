@@ -1,0 +1,23 @@
+## .NET / C#
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.cache
+
+## NuGet
+*.nupkg
+packages/
+project.lock.json
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+
+## OS
+.DS_Store
+Thumbs.db

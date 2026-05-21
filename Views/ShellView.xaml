@@ -1,0 +1,51 @@
+<mah:MetroWindow
+    x:Class="Metro.Views.ShellView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:views="clr-namespace:Metro.Views"
+    Title="Metro - מערכת ניהול"
+    Width="1200" Height="750"
+    MinWidth="900" MinHeight="600"
+    WindowStartupLocation="CenterScreen"
+    FlowDirection="RightToLeft"
+    GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+    BorderThickness="1">
+
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button Content="{Binding CurrentUser, StringFormat='משתמש: {0}'}" IsEnabled="False"/>
+            <Button Content="יציאה" Command="{Binding LogoutCommand}" ToolTip="התנתק מהמערכת"/>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="{DynamicResource MahApps.Brushes.Accent}" Height="4"/>
+
+        <TabControl Grid.Row="1"
+                    SelectedIndex="{Binding SelectedTabIndex}"
+                    mah:TabControlHelper.Underlined="TabPanel"
+                    FontSize="14">
+            <TabItem Header="📊 לוח בקרה">
+                <views:DashboardView DataContext="{Binding Dashboard}"/>
+            </TabItem>
+            <TabItem Header="👥 משתמשים">
+                <views:UsersView DataContext="{Binding Users}"/>
+            </TabItem>
+            <TabItem Header="📦 מוצרים">
+                <views:ProductsView DataContext="{Binding Products}"/>
+            </TabItem>
+            <TabItem Header="📋 הזמנות">
+                <views:OrdersView DataContext="{Binding Orders}"/>
+            </TabItem>
+            <TabItem Header="⚙ הגדרות">
+                <views:SettingsView DataContext="{Binding Settings}"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</mah:MetroWindow>
